@@ -24,10 +24,10 @@ async def song(client, message: Message):
     if not urlissed:
         await client.send_message(
             message.chat.id,
-            f"⚠️ Check spelling!\n\nExample: `{HNDLR}song monody`", reply_to_message_id=reply_id
+            f"⚠️ Kiểm tra chính tả! Ví dụ: `{HNDLR}mp3 con cò bé bé`", reply_to_message_id=reply_id
         )
         return
-    pablo = await client.send_message(message.chat.id, f"**🔎 Searching** `{urlissed}`", reply_to_message_id=reply_id)
+    pablo = await client.send_message(message.chat.id, f"**🔎 Đợi xíu đi, đang tìm** `{urlissed}`", reply_to_message_id=reply_id)
     search = SearchVideos(f"{urlissed}", offset=1, mode="dict", max_results=1)
     mi = search.result()
     mio = mi["search_result"]
@@ -62,11 +62,11 @@ async def song(client, message: Message):
         with YoutubeDL(opts) as ytdl:
             ytdl_data = ytdl.extract_info(mo, download=True)
     except Exception as e:
-        await pablo.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
+        await pablo.edit(f"**Bài này tao tải về đéo được!** \n**Error :** `{str(e)}`")
         return
     c_time = time.time()
     capy = f"""
-**🏷️ Name:** [{thum}]({mo})
+**🏷️ Tên:** [{thum}]({mo})
 """
     file_stark = f"{ytdl_data['id']}.mp3"
     await client.send_audio(
@@ -81,7 +81,7 @@ async def song(client, message: Message):
         progress_args=(
             pablo,
             c_time,
-            f"**📥 Download** `{urlissed}`",
+            f"**📥 Đợi xíu đi, tao đang tải** `{urlissed}`",
             file_stark,
         ),
     )
@@ -138,7 +138,7 @@ async def progress(current, total, message, start, type_of_ps, file_name=None):
         if file_name:
             try:
                 await message.edit(
-                    "{}\n**File Name:** `{}`\n{}".format(type_of_ps, file_name, tmp)
+                    "{}".format(type_of_ps)
                 )
             except FloodWait as e:
                 await asyncio.sleep(e.x)
@@ -237,7 +237,7 @@ async def vsong(client, message: Message):
     reply_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
 
     pablo = await client.send_message(
-        message.chat.id, f"**🔎 Searching..** `{urlissed}`", reply_to_message_id=reply_id
+        message.chat.id, f"**🔎 Bố đang tìm đợi tí..** `{urlissed}`", reply_to_message_id=reply_id
     )
     if not urlissed:
         await pablo.edit("Invalid Command Syntax Please Check help Menu To Know More!")
@@ -270,7 +270,7 @@ async def vsong(client, message: Message):
         with YoutubeDL(opts) as ytdl:
             ytdl_data = ytdl.extract_info(url, download=True)
     except Exception as e:
-        await event.edit(event, f"**Download Failed** \n**Error :** `{str(e)}`")
+        await event.edit(event, f"**Tải đéo được** \n**Error :** `{str(e)}`")
         return
     c_time = time.time()
     file_stark = f"{ytdl_data['id']}.mp4"
@@ -289,7 +289,7 @@ async def vsong(client, message: Message):
         progress_args=(
             pablo,
             c_time,
-            f"**📥 Download** `{urlissed}`",
+            f"**📥 Bố mày đang tải ** `{urlissed}`",
             file_stark,
         ),
     )

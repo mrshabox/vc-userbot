@@ -93,7 +93,7 @@ async def play(client, m: Message):
     if replied:
         if replied.audio or replied.voice:
             await m.delete()
-            huehue = await replied.reply("**🔄 Processing**")
+            huehue = await replied.reply("**🔄 Đợi bố mày xí**")
             dl = await replied.download()
             link = replied.link
             if replied.audio:
@@ -107,13 +107,9 @@ async def play(client, m: Message):
                 pos = add_to_queue(chat_id, songname, dl, link, "Audio", 0)
                 await huehue.delete()
                 # await m.reply_to_message.delete()
-                await m.reply_photo(
-                    photo="https://telegra.ph/file/d6f92c979ad96b2031cba.png",
-                    caption=f"""
-**#⃣ Song Added  {pos}
-🏷️ Title: [{songname}]({link})
-💬 Chat ID: {chat_id}
-🎧 Requested by: {m.from_user.mention}**
+                await m.reply_text(
+                       f"""
+**#⃣ Đợi  {pos} bài nữa đi rồi tao mở [{songname}]({link})**
 """,
                 )
             else:

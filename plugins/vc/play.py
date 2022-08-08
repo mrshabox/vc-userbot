@@ -123,14 +123,7 @@ async def play(client, m: Message):
                 add_to_queue(chat_id, songname, dl, link, "Audio", 0)
                 await huehue.delete()
                 # await m.reply_to_message.delete()
-                await m.reply_photo(
-                    photo="https://telegra.ph/file/6213d2673486beca02967.png",
-                    caption=f"""
-**▶ Start Playing Songs
-🏷️ Title: [{songname}]({link})
-💬 Chat ID: {chat_id}
-🎧 Requested by: {m.from_user.mention}**
-""",
+                await m.reply_photo(f"""**Đang mở [{songname}]({link}) cho {m.from_user.mention}**""",
                 )
 
     else:
@@ -138,7 +131,7 @@ async def play(client, m: Message):
             await m.reply("Reply to Audio File or provide something for Searching ...")
         else:
             await m.delete()
-            huehue = await m.reply("🔎 Searching...")
+            huehue = await m.reply("🔎 Bố mày đang tìm đợi tí...")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search == 0:
